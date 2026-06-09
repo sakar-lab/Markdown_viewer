@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Math Notes Previewer</title>
+
+  <meta name="description" content="Live Markdown + LaTeX math previewer for math notes." />
+  <meta name="theme-color" content="#0f172a" />
+
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/styles/atom-one-dark.min.css" />
+
+  <!-- MathJax configuration -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+      },
+      chtml: {
+        scale: 1,
+        mtextInheritFont: true
+      }
+    };
+  </script>
+  <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/highlight.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js" defer></script>
+  <script src="app.js" defer></script>
+  <script type="module" src="live-editor.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-title">
+      <span class="app-logo">∑</span>
+      <div class="app-text">
+        <h1>Math Notes Previewer</h1>
+        <p>Markdown + LaTeX, live preview, offline-ready.</p>
+      </div>
+    </div>
+    <div class="app-actions">
+      <input id="import-md-input" class="file-input" type="file" accept=".md,.markdown,text/markdown,text/plain" />
+      <button id="import-md" class="action-button" type="button">
+        Import MD
+      </button>
+      <button id="theme-toggle" class="icon-button" type="button" aria-label="Toggle dark mode">
+        ☾
+      </button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <section class="pane pane-preview">
+      <header class="pane-header">
+        <h2>Note</h2>
+        <div class="pane-header-right">
+          <span class="pane-hint">Live Markdown + LaTeX editing.</span>
+        </div>
+      </header>
+      <div class="pane-body">
+        <textarea id="editor" spellcheck="false"></textarea>
+        <div class="preview-wrapper">
+          <div id="preview" class="markdown-body"></div>
+        </div>
+        <div id="cm-live-root" class="cm-live-root"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <span>Powered by <a href="https://github.com/markedjs/marked" target="_blank" rel="noreferrer">marked</a> &amp; <a href="https://www.mathjax.org/" target="_blank" rel="noreferrer">MathJax</a>.</span>
+  </footer>
+</body>
+</html>
